@@ -1,0 +1,8 @@
+export { default as Posts } from './Posts/Posts'
+export { default as Form } from './Form/Form'
+export { default as Loader } from './Loader/Loader'
+export { default as Navbar } from './Navbar/Navbar'
+export { default as HomePage } from './HomePage/HomePage'
+export { default as Auth } from './Auth/Auth'
+export { default as SinglePost } from './SinglePost/SinglePost'
+export { default as NotFound } from './NotFound/NotFound'
