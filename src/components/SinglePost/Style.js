@@ -118,6 +118,66 @@ export default makeStyles(theme => ({
             top: '0'
         }
     },
-    selectedFile: {
+    name: {
+        marginLeft: '0.8rem'
     },
+    // ------------------------------ //
+    // Recommended cards ------ //
+    recommendedPosts: {
+        width: '100%',
+        background: '#FFFFFF',
+        borderRadius: '5px',
+        margin: '1rem 0',
+        padding: '0.8rem 0'
+    },
+    Card_post: {
+        width: '90%',
+        borderRadius: '5px',
+        margin: '1rem auto',
+        padding: '0.8rem',
+        display: 'flex',
+        alignItems: 'center',
+        boxShadow: '0px 0px 10px rgba(0,0,0,0.2)',
+        ["@media (max-width:650px)"]: {
+            flexDirection: 'column',
+            alignItems: 'flex-start'
+        },
+    },
+    Card_Image: {
+        width: '300px',
+        position: 'relative',
+        // add media queries
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+            marginBottom: '0.8rem'
+        },
+        '& img': {
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+        }
+    },
+    Card_Content: {
+        width: '100%',
+        padding: '0 1rem',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+    },
+    Card_Title: {
+        fontSize: '1rem',
+        fontWeight: '500',
+        lineHeight: '1.2',
+        marginBottom: '0.8rem'
+    },
+    Card_Name: {
+        fontSize: '0.8rem',
+        color: 'grey',
+        lineHeight: '1.5'
+    },
+    Card_Message:{
+        fontSize: '0.7rem',
+        color: '#36454F',
+        lineHeight: '2' 
+    }
 }))

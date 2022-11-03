@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Avatar, CircularProgress, Container, Divider, Paper, Typography } from '@material-ui/core'
+import React, { useEffect } from 'react'
+import { Avatar, Box, Button, Container, Divider, Typography } from '@material-ui/core'
 import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { motion } from 'framer-motion/dist/framer-motion'
 import moment from 'moment'
 
 import { getPost, getPostBySearch } from '../../actions/posts'
@@ -28,13 +29,13 @@ const SinglePost = () => {
 
   if (!post) return null;
 
-  const openPost = (_id) => history.push(`/posts/${_id}`);
+  const openPost = (_id) => history.push(`/post/${_id}`);
 
   if (isLoading) {
     return (
-      <Paper elevation={6} className={classes.loadingPaper}>
-        <CircularProgress size="7em" />
-      </Paper>
+      <Container style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Loader />
+      </Container>
     );
   }
 
@@ -72,21 +73,42 @@ const SinglePost = () => {
           </div>
         </div>
       )}
-      {!!recommendedPosts.length && (
+      {recommendedPosts.length && (
         <div className={classes.section}>
           <Typography gutterBottom variant="h5">You might also like:</Typography>
           <Divider />
-          <div className={classes.recommendedPosts}>
-            {recommendedPosts.map(({ title, name, message, likes, selectedFile, _id }) => (
-              <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
-                <Typography gutterBottom variant="h6">{title}</Typography>
-                <Typography gutterBottom variant="subtitle2">{name}</Typography>
-                <Typography gutterBottom variant="subtitle2">{message}</Typography>
-                <Typography gutterBottom variant="subtitle1">Likes: {likes.length}</Typography>
-                <img src={selectedFile} width="200px" />
-              </div>
+          <motion.div
+            className={classes.recommendedPosts}
+            animate={{ opacity: 1, transition: { duration: 2, delay: 1 } }}
+            initial={{ opacity: 0 }}
+          >
+            {recommendedPosts.map(({ title, name, message, selectedFile, _id }) => (
+              <motion.div
+                onClick={() => openPost(_id)}
+                key={_id}
+                className={classes.Card_post}
+              >
+                {/* Image Part */}
+                <div className={classes.Card_Image}>
+                  <img src={selectedFile} alt={title} />
+                </div>
+                {/* Text Part */}
+                <div className={classes.Card_Content}>
+                  <Typography gutterBottom className={classes.Card_Title} variant="h6">{title}</Typography>
+                  <Typography gutterBottom className={classes.Card_Name} variant="subtitle2">Written By - {name}</Typography>
+                  <Box>
+                    <Typography gutterBottom className={classes.Card_Message} variant="subtitle2">{message.substring(0, 80)}....</Typography>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      onClick={() => openPost(_id)}
+                    >Read More</Button>
+                  </Box>
+                </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       )}
     </Container >
